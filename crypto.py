@@ -2,7 +2,9 @@ import requests
 import json
 from currency_converter import CurrencyConverter
 currency = CurrencyConverter()
-API_KEY="ljo0rdtfme3bfrr3r033d"
+from dotenv import dotenv_values
+config = dotenv_values(".env")
+API_KEY = config['API_KEY_LUNAR']
 
 def get_info(coin):
     symbol = get_symbol(coin.capitalize())
