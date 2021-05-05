@@ -2,10 +2,12 @@ import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 import crypto
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAAHBRKzWsBABABivZCZBq88MV3jjZC1yGA2GAbSUb9xvM1x3zlqeqJQZB2SZAJeOi1nayCgHQ4b0AlHWHHoZAlD7otSZBeXZATxsUtN4keJPNouJCua7CR5yDeQOIdFNiYLc64bLTfFCYsANOLAsDmZCookGXAvSZCqLUUWHTBJYH4WgZDZD'
-VERIFY_TOKEN = 'BV-D0B0TCR1PT0'
+ACCESS_TOKEN = config['ACCESS_TOKEN']
+VERIFY_TOKEN = config['VERIFY_TOKEN']
 bot = Bot(ACCESS_TOKEN)
 
 @app.route('/', methods=['GET', 'POST'])
