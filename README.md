@@ -10,3 +10,4 @@ Messenger bot developed for my personal use. Its purpose is to help me track bet
 - [ ] Send updates automatically for a specific cryptocurrency chosen by subscribed users
 - [ ] Improve messages structure (style)
 - [ ] Use Giphy API to retrieve gifs from specific use case/market value
+- [ ] Containerising the application and deploy it on either Heroku or AWS
