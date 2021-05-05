@@ -1,10 +1,11 @@
 import random
 from flask import Flask, request
 from pymessenger.bot import Bot
+import crypto
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'ACCESS_TOKEN'
-VERIFY_TOKEN = 'VERIFY_TOKEN'
+ACCESS_TOKEN = 'EAAHBRKzWsBABABivZCZBq88MV3jjZC1yGA2GAbSUb9xvM1x3zlqeqJQZB2SZAJeOi1nayCgHQ4b0AlHWHHoZAlD7otSZBeXZATxsUtN4keJPNouJCua7CR5yDeQOIdFNiYLc64bLTfFCYsANOLAsDmZCookGXAvSZCqLUUWHTBJYH4WgZDZD'
+VERIFY_TOKEN = 'BV-D0B0TCR1PT0'
 bot = Bot(ACCESS_TOKEN)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -20,28 +21,34 @@ def receive_message():
                 if message.get('message'):
                     recipient = message['sender']['id']
                     if message['message'].get('text'):
-                        response = get_message()
+                        user_message = message['message'].get('text').lower()
+                        #function that takes name of crypto and return a few informations
+                        print(user_message)
+                        response = crypto.get_info(user_message)
                         send_message(recipient, response)
                     if message['message'].get('attachments'):
-                        response = get_message()
+                        response = "Sorry I don't handle this type of files at the moment :/"
                         send_message(recipient, response)
-                        
     return "Message Processed!"
 
+# Function that sends every x period value of specific crypto
 def verify_token(token):
     if token == VERIFY_TOKEN:
         return request.args.get("hub.challenge")
     return 'Invalid Verification Token'
 
-def get_message():
-    sample_responses = ["You are stunning!", "We're proud of you.", "Keep on being you!", "We're greatful to know you :)"]
-    # return selected item to the user
-    return random.choice(sample_responses)
+
 
 def send_message(recipient_id, response):
     # Sends User the text message provided via input response parameter
+    bot.send_image_url(recipient_id, "https://media.giphy.com/media/Ogak8XuKHLs6PYcqlp/giphy.gif")
     bot.send_text_message(recipient_id, response)
     return "Success"
 
 if __name__ == '__main__':
     app.run()
+    
+    
+#TODO: Send updates automatically for a specific cryptocurrency or more than one
+#TODO: Subscription Flow -> Yo activates the flow to make you subscribe
+#TODO: No database just a JSON File with (Recipient_ID: ['DOGE', 'XRP'])
