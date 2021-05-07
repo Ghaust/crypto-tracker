@@ -11,3 +11,4 @@ Messenger bot developed for my personal use. Its purpose is to help me track bet
 - [ ] Improve messages structure (style)
 - [ ] Use Giphy API to retrieve gifs from specific use case/market value
 - [ ] Containerising the application and deploy it on either Heroku or AWS
+- [ ] Get Current value of wallet from binance and coinbase
